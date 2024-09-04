@@ -91,7 +91,7 @@ if __name__ == '__main__':
                                          object_name=current_file_name,
                                          file_path=file_path)
 
-                # 새로운 파일 이름을 만듭니다.
+                # 기존 파일 이름을 초기화합니다.
                 current_file_name = None
 
     except KeyboardInterrupt:
