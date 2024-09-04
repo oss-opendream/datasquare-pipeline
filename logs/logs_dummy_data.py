@@ -1,5 +1,6 @@
 import random
 import time
+import pytz
 from datetime import datetime
 
 def generate_dummy_log():
@@ -71,10 +72,15 @@ def generate_dummy_log():
         "curl/7.68.0"
     ]
   
+    
+    tz = pytz.timezone('Asia/Seoul')
+    # now = datetime.now(tz)
+    # offset = now.strftime('%z')
+    # timezone_code = get_timezone_code(offset)
 
 
     ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
-    time_stamp = datetime.now().strftime("%d/%b/%Y:%H:%M:%S %z")
+    time_stamp = datetime.now(tz).strftime("%d/%b/%Y:%H:%M:%S %z")
     method, path = random.choice(method_path_pairs)
     # method = random.choice(methods)
     # path = random.choice(paths)
@@ -96,5 +102,5 @@ def generate_dummy_log():
 
 
 # test main
-# if __name__ == "__main__":
-#     print(generate_dummy_log())
+if __name__ == "__main__":
+    print(generate_dummy_log())
