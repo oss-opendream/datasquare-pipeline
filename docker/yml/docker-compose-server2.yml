@@ -1,0 +1,7 @@
+include:
+  - docker-compose-kafka2.yml
+  - docker-compose-elk.yml
+extra_hosts:
+  - "server1:10.178.0.3"
+  - "server2:10.178.0.4"
+  - "server3:10.178.0.5"

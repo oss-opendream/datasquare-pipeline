@@ -1,0 +1,7 @@
+include:
+  - docker-compose-kafka3.yml
+  - docker-compose-minio.yml
+extra_hosts:
+  - "server1:10.178.0.3"
+  - "server2:10.178.0.4"
+  - "server3:10.178.0.5"
