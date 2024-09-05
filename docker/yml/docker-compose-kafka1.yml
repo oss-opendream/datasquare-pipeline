@@ -28,3 +28,37 @@ services:
       # Replace CLUSTER_ID with a unique base64 UUID using "bin/kafka-storage.sh random-uuid" 
       # See https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-storage-sh
       CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
+      KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
+    volumes:
+      - ../jmx-exporter:/usr/share/jmx_exporter/
+#  connect:
+#    image: confluentinc/cp-kafka-connect:7.1.10
+#    hostname: connect
+#    container_name: connect
+#    depends_on:
+#      - broker
+#    ports:
+#      - "8083:8083"
+#      - "8080:8080"
+#    environment:
+#      CONNECT_BOOTSTRAP_SERVERS: '10.178.0.3:9092,10.178.0.4:9092,10.178.0.5:9092'
+#      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+#      CONNECT_REST_PORT: 8083
+#      CONNECT_GROUP_ID: compose-connect-group
+#      CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+#      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 3
+#      CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+#      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 3
+#      CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+#      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 3
+#      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+#      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+#      CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+#      CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+#      CONNECT_PLUGIN_PATH: "/usr/share/java,/etc/kafka-connect/jars"
+#      JMX_PORT: 9101
+#      KAFKA_JMX_OPTS: -javaagent:/opt/kafka/libs/jmx_prometheus_javaagent-0.19.0.jar=8080:/etc/kafka-connect/jmx_exporter.yaml -Dcom.sun.management.jmxremote.authenticate=false
+#    volumes:
+#      - ../connect/plugins/confluentinc-kafka-connect-jdbc/lib:/etc/kafka-connect/jars
+#      - ../connect/config/jmx_exporter/jmx_exporter.yaml:/etc/kafka-connect/jmx_exporter.yaml
+#      - ../connect/libs/jmx_prometheus_javaagent-0.19.0.jar:/opt/kafka/libs/jmx_prometheus_javaagent-0.19.0.jar
