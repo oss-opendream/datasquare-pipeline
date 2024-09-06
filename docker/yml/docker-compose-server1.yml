@@ -1,6 +1,7 @@
 include:
   - path:
-    - docker-compose-kafka1.yml
+#    - docker-compose-kafka1.yml
+    - docker-compose-monitoring.yml
   - extra_hosts:
     - "server1:10.178.0.3"
     - "server2:10.178.0.4"
