@@ -4,13 +4,17 @@ services:
     hostname: broker
     container_name: broker
     ports:
+      - "8080:8080"
       - "9092:9092"
+      - "9101:9101"
       - "29093:29093"
       - "29092:29092"
     environment:
       KAFKA_NODE_ID: 2
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
       KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://10.178.0.4:29092,PLAINTEXT_HOST://10.178.0.4:9092'
+      KAFKA_JMX_PORT: 9101
+      KAFKA_JMX_HOSTNAME: server2
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 3
@@ -22,3 +26,11 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
       CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
+      KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
+    volumes:
+      - kafka:/var/lib/kafka/data
+      - ../jmx-exporter:/usr/share/jmx_exporter/
+      - ../connect/libs/jmx_prometheus_javaagent-0.19.0.jar:/opt/kafka/libs/jmx_prometheus_javaagent-0.19.0.jar
+
+volumes:
+  kafka: 

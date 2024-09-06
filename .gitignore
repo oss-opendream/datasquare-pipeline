@@ -1,11 +1,8 @@
 # temp log directory
 temp/
-
 # configuration files
 *.conf
-
 # MinIO data files
 minio/
-
 # Python
 __pycache__/
