@@ -7,7 +7,7 @@ from logs_dummy_data import generate_dummy_log
 if __name__ == '__main__':
 
     config = {
-        'bootstrap.servers': 'server1:9092, server2:9092',
+            'bootstrap.servers': 'server1:9092, server2:9092, server3:9092',
         'client.id': socket.gethostname(),
     }
 
@@ -31,4 +31,3 @@ if __name__ == '__main__':
         producer.produce(topic, line)
         producer.poll(10000)
         producer.flush()
-        time.sleep(5)
