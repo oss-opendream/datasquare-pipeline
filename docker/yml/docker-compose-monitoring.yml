@@ -1,0 +1,23 @@
+services:
+    grafana:
+        image: "grafana/grafana:10.1.3"
+        ports:
+        - "3000:3000"
+        environment:
+            GF_PATHS_DATA: /var/lib/grafana
+            GF_SECURITY_ADMIN_PASSWORD: datasquare
+        volumes:
+        - ../grafana/provisioning:/etc/grafana/provisioning
+        - ../grafana/dashboards:/var/lib/grafana/dashboards
+        container_name: grafana
+        depends_on:
+        - prometheus
+
+    prometheus:
+        image: "prom/prometheus:2.47.0"
+        ports:
+        - "9090:9090"
+        volumes:
+        - ../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+        command: "--config.file=/etc/prometheus/prometheus.yml"
+        container_name: prometheus
