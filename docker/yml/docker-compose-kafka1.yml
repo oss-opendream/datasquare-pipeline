@@ -31,5 +31,9 @@ services:
       CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
       KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
     volumes:
+      - kafka:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
       - ../connect/libs/jmx_prometheus_javaagent-0.19.0.jar:/opt/kafka/libs/jmx_prometheus_javaagent-0.19.0.jar
+
+volumes:
+  kafka
