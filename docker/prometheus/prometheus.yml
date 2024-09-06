@@ -27,3 +27,17 @@ scrape_configs:
 
     static_configs:
     - targets: ['server1:8080','server2:8080', 'server3:8080']
+
+  - job_name: 'minio-job'
+    bearer_token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoiYWRtaW4iLCJleHAiOjQ4NzkyMTI2NTN9.E0IfGkHd8SXVt3KmbDrAb6uRoFILmS2chFBEJupsE7fuIY9KVJYcYBXpYpexarjrLzBXHXIA5xIbGafErw7VdA'
+    metrics_path: '/minio/v2/metrics/cluster'
+    scheme: 'http'
+    static_configs:
+    - targets: ['server3:9000']
+
+  - job_name: 'minio-job-bucket'
+    bearer_token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoiYWRtaW4iLCJleHAiOjQ4NzkyMTI2NTN9.E0IfGkHd8SXVt3KmbDrAb6uRoFILmS2chFBEJupsE7fuIY9KVJYcYBXpYpexarjrLzBXHXIA5xIbGafErw7VdA'
+    metrics_path: '/minio/v2/metrics/bucket'
+    scheme: 'http'
+    static_configs:
+    - targets: ['server3:9000']
