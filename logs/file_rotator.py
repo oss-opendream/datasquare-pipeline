@@ -11,7 +11,7 @@ class FileRotator:
 
     def _open_new_file(self):
         filename = f"{self.base_filename}"
-        return open(filename, 'a')
+        return open(filename, mode='a', encoding='utf-8')
 
     def _should_rollover(self, message):
         if self.max_bytes > 0:
