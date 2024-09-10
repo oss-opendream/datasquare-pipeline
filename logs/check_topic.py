@@ -24,11 +24,4 @@ if __name__ == '__main__':
         pass
     else:
         print("no")
-        kadmin.create_topics([NewTopic(topic_name, num_partitions=3, replication_factor= 3)])
-
-    topic_dict = kadmin.list_topics().topics
-    print(topic_dict)
-    
-
-    
-    print()
+        new_topic = kadmin.create_topics([NewTopic(topic_name, num_partitions=3, replication_factor= 3)])
