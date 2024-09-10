@@ -10,5 +10,5 @@ compose_files=("docker-compose-kafka1.yml" "docker-compose-kafka2.yml" "docker-c
 for i in ${!servers[@]}; do
   echo "Docker composing server[$i] up..."
   DOCKER_CMD="docker compose -f ~/datasquare-pipeline/docker/yml/${compose_files[$i]} up -d"
-  ssh ${servers[$i+1]} "$DOCKER_CMD"
+  ssh ${servers[$i]} "$DOCKER_CMD"
 done

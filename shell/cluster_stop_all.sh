@@ -9,5 +9,5 @@ compose_files=("docker-compose-server1.yml" "docker-compose-server2.yml" "docker
 for i in ${!servers[@]}; do
   echo "Docker composing server[$i] down..."
   DOCKER_CMD="docker compose -f ~/datasquare-pipeline/docker/yml/${compose_files[$i]} down"
-  ssh ${servers[$i+1]} "$DOCKER_CMD"
+  ssh ${servers[$i]} "$DOCKER_CMD"
 done
