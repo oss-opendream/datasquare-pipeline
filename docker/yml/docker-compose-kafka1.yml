@@ -30,10 +30,6 @@ services:
       # See https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-storage-sh
       CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
       KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
-    command: 
-      - /bin/bash 
-      - -c 
-      - unset $KAFKA_OPTS
 
     volumes:
       - kafka:/var/lib/kafka/data
