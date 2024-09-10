@@ -26,7 +26,7 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
       CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
-      KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
+      EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
     volumes:
       - kafka:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
