@@ -41,3 +41,7 @@ scrape_configs:
     scheme: 'http'
     static_configs:
     - targets: ['server3:9000']
+
+  - job_name: 'node-exporter'
+    static_configs:
+    - targets: ['server1:9100', 'server2:9100', 'server3:9100']

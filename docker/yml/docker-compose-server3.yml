@@ -2,6 +2,7 @@ include:
   - path:
     - docker-compose-kafka3.yml
     - docker-compose-minio.yml
+    - docker-compose-node_exporter.yml
   - extra_hosts:
     - "server1:10.178.0.3"
     - "server2:10.178.0.4"
