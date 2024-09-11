@@ -1,7 +1,9 @@
 import socket
-
 import time
+
 from confluent_kafka import Producer
+from confluent_kafka.admin import AdminClient, NewTopic
+
 from logs_dummy_data import generate_dummy_log
 
 if __name__ == '__main__':
@@ -11,23 +13,30 @@ if __name__ == '__main__':
         'client.id': socket.gethostname(),
     }
 
+    # Produce data by selecting random values from these lists.
+    topic = "daily_log_test2"
+
+    # Check Topic
+    admin = AdminClient(config)
+    topic_dict = admin.list_topics().topics
+
+    if topic in topic_dict:
+        pass
+    else:
+        admin.create_topics([NewTopic(topic, num_partitions=3, replication_factor=3)])
+        time.sleep(2)
+
     # Create Producer instance
     producer = Producer(config)
-    
-    # Produce data by selecting random values from these lists.
-    topic = "daily_log"
-    logfile = "20240902_logs.txt"
-
-    # 파일 읽는 코드
-    # with open(file=logfile, mode='r') as f:
-    #     for line in f:
-    #         producer.produce(topic, line[:-2])
-    #         producer.poll(10000)
-    #         producer.flush()
 
     # 바로 이슈 생성 후 던지기 
+    i = 0
     while True:
+        i += 1
         line = generate_dummy_log()
         producer.produce(topic, line)
         producer.poll(10000)
         producer.flush()
+        if i%100 == 0:
+            print(i)
+        
