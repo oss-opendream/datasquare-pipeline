@@ -8,7 +8,7 @@ compose_files=("docker-compose-server1.yml" "docker-compose-server2.yml" "docker
 
 # 반복문을 사용하여 서버별로 docker-compose 명령 실행
 for i in ${!servers[@]}; do
-  echo "Docker composing server[$i] up..."
+  echo "Docker composing server[$((i+1))] up..."
   DOCKER_CMD="docker compose -f ~/datasquare-pipeline/docker/yml/${compose_files[$i]} up -d"
   ssh ${servers[$i]} "$DOCKER_CMD"
 done
