@@ -1,7 +1,7 @@
 # temp log directory
 temp/
 # configuration files
-*.conf
+datasquare_kafka2minio.conf
 # MinIO data files
 minio/
 # Python
