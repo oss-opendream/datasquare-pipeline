@@ -17,7 +17,7 @@ output.kafka:
 
   # message topic selection + partitioning
   # topic: '%{[fields.log_topic]}'
-  topic: 'daily_log_test2'
+  topic: 'datasquare_web_log'
   partition.round_robin:
     reachable_only: false
 
