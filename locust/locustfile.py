@@ -22,14 +22,32 @@ class MyTaskSet(TaskSet):
     def test_200(self):
         self.client.get("/status/200")
 
+    data = '{"key": "value"}'  # Example data payload
+    header = {'access-token': 'your_token_here'}  # Example header
+
+    @task
+    def view_get(self):
+        path = "/data_request/view"
+        params = {'issue_id': 5}
+        self.client.get(path, data=params, headers=self.header)
+
     @task
     def data_request_view(self):
-        self.client.get("/data_request/view")
+        path = "/data_request/view"
+        params = {'issue_id': 2}
+        self.client.get(path, data=self.data, params=params, headers=self.header)
 
+    @task
+    def feed(self):
+        path = "/feed"
+        self.client.get(path, data=self.data, headers=self.header)
 
+    @task
+    def publish(self):
+        path = "/data_request/publish"
+        self.client.get(path, data=self.data, headers=self.header)
+        
 
 class MyLoadTest(HttpUser):
     tasks = [MyTaskSet]
     wait_time = between(1, 2)
-
-    
