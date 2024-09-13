@@ -1,6 +1,6 @@
-from locust import HttpUser, task, between
+from locust import FastHttpUser, task, between
 
-class WebsiteUser(HttpUser):
+class WebsiteUser(FastHttpUser):
 
     wait_time = between(3, 7)  # Random wait time between 3 and 7 seconds
     data = '{"key": "value"}'  # Example data payload
@@ -8,21 +8,27 @@ class WebsiteUser(HttpUser):
 
     def on_start(self):
         print("Test Start")
-        
+
     def on_stop(self):
         print("Test End")
 
     @task
-    def code_500(self):
+    def view_get(self):
         path = "/data_request/view"
         params = {'issue_id': 5}
-        self.client.get(path, data=self.data,params=params,  headers=self.header)
-    
+        self.client.get(path, data=self.data, params=params, headers=self.header)
+
+    @task
+    def view_post(self):
+        path = "/data_request/view"
+        params = {'issue_id': 5}
+        self.client.post(path, data=self.data, params=params, headers=self.header)
+
     @task
     def data_request_200(self):
         path = "/data_request/view"
         params = {'issue_id': 2}
-        self.client.get(path, data=self.data,params=params,  headers=self.header)
+        self.client.get(path, data=self.data, params=params, headers=self.header)
 
     @task
     def feed(self):
