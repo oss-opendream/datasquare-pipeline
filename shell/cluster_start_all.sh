@@ -12,3 +12,6 @@ for i in ${!servers[@]}; do
   DOCKER_CMD="docker compose -f ~/datasquare-pipeline/docker/yml/${compose_files[$i]} up -d"
   ssh ${servers[$i]} "$DOCKER_CMD"
 done
+
+# Kafka Topic 생성 Python script 실행
+~/.pyenv/versions/ds_env/bin/python ~/datasquare-pipeline/logs/check_topic.py
