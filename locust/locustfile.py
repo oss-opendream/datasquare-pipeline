@@ -1,73 +1,35 @@
-from locust import FastHttpUser, task, between
+from locust import HttpUser, task, between, TaskSet
 
-class WebsiteUser(FastHttpUser):
 
-    wait_time = between(3, 7)  # Random wait time between 3 and 7 seconds
-    data = '{"key": "value"}'  # Example data payload
-    header = {'access-token': 'your_token_here'}  # Example header
-
-    def on_start(self):
-        print("Test Start")
-
-    def on_stop(self):
-        print("Test End")
+class MyTaskSet(TaskSet):
+    @task
+    def test_400(self):
+        self.client.get("/status/400")
 
     @task
-    def view_get(self):
-        path = "/data_request/view"
-        params = {'issue_id': 5}
-        self.client.get(path, data=self.data, params=params, headers=self.header)
+    def test_404(self):
+        self.client.get("/status/404")
 
     @task
-    def view_post(self):
-        path = "/data_request/view"
-        params = {'issue_id': 5}
-        self.client.post(path, data=self.data, params=params, headers=self.header)
+    def test_422(self):
+        self.client.get("/status/422")
 
     @task
-    def data_request_200(self):
-        path = "/data_request/view"
-        params = {'issue_id': 2}
-        self.client.get(path, data=self.data, params=params, headers=self.header)
+    def test_500(self):
+        self.client.get("/status/500")
 
     @task
-    def feed(self):
-        path = "/feed"
-        self.client.get(path, data=self.data, headers=self.header)
+    def test_200(self):
+        self.client.get("/status/200")
 
     @task
-    def publish(self):
-        path = "/data_request/publish"
-        self.client.get(path, data=self.data, headers=self.header)
+    def data_request_view(self):
+        self.client.get("/data_request/view")
+
+
+
+class MyLoadTest(HttpUser):
+    tasks = [MyTaskSet]
+    wait_time = between(1, 2)
+
     
-
-
-
-    # @task(2)
-    # def query_test(self):
-    #     path = "/feed"  # Example path
-    #     # params = {'total_count': 100}  # Example parameter
-    #     self.client.post(path, data=self.data, headers=self.header)
-    #     # self.client.post(path, data=self.data, params=params, headers=self.header)
-
-    # @task
-    # def total_count_test(self):
-    #     path = "/signin"  # Example path
-    #     self.client.post(path, data=self.data, headers=self.header)
-
-    # @task
-    # def total_count_test2(self):
-    #     path = "/data_request/view"  # Example path
-    #     params = {'issue_id': 3}  # Example parameter
-    #     self.client.post(path, data=self.data, params=params, headers=self.header)
-
-    # @task
-    # def filter_test(self):
-    #     path = "/profile/123123"  # Example path
-    #     self.client.post(path, data=self.data, headers=self.header)
-    
-    # @task
-    # def filter_test2(self):
-    #     path = "/admin/account/create"  # Example path
-        
-    #     self.client.post(path, data=self.data, headers=self.header)
