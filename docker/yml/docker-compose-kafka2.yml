@@ -12,7 +12,7 @@ services:
     environment:
       KAFKA_NODE_ID: 2
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://10.178.0.4:29092,PLAINTEXT_HOST://10.178.0.4:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://server2:29092,PLAINTEXT_HOST://server2:9092'
       KAFKA_JMX_PORT: 9101
       KAFKA_JMX_HOSTNAME: server2
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
@@ -20,14 +20,15 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 3
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
       KAFKA_PROCESS_ROLES: 'broker,controller'
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@10.178.0.3:29093,2@10.178.0.4:29093, 3@10.178.0.5:29093'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@server1:29093,2@server2:29093, 3@server3:29093'
       KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      KAFKA_LOG_DIRS: '/var/lib/kafka/data/kraft-combined-logs'
       CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
       KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
       KAFKA_CONFLUENT_CONSUMER_LAG_EMITTER_ENABLED: 'true'
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
     volumes:
       - kafka:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/

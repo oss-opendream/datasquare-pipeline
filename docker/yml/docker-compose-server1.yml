@@ -4,7 +4,8 @@ include:
     - docker-compose-monitoring.yml
     - docker-compose-node_exporter.yml
     - docker-compose-kafka_exporter.yml
-  - extra_hosts:
-    - "server1:10.178.0.3"
-    - "server2:10.178.0.4"
-    - "server3:10.178.0.5"
+    - docker-compose-filebeat.yml
+  # - extra_hosts:
+  #   - "server1:10.178.0.3"
+  #   - "server2:10.178.0.4"
+  #   - "server3:10.178.0.5"
