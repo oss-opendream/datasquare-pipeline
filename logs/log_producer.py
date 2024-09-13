@@ -14,7 +14,7 @@ if __name__ == '__main__':
     }
 
     # Produce data by selecting random values from these lists.
-    topic = "daily_log_test2"
+    topic = "datasquare_web_log_test"
 
     # Check Topic
     admin = AdminClient(config)

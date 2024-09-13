@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
     # Create Consumer instance
     consumer = Consumer(kafka_config)
-    topics = ["daily_log"]
+    topics = ["datasquare_web_log"]
     consumer.subscribe(topics)
 
     # File management setup
