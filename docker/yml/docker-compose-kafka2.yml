@@ -30,9 +30,9 @@ services:
       KAFKA_CONFLUENT_CONSUMER_LAG_EMITTER_ENABLED: 'true'
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
     volumes:
-      - kafka:/var/lib/kafka/data
+      - kafka_log:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
       - ../connect/libs/jmx_prometheus_javaagent-0.19.0.jar:/opt/kafka/libs/jmx_prometheus_javaagent-0.19.0.jar
 
 volumes:
-  kafka: 
+  kafka_log: 
