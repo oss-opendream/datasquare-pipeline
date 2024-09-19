@@ -31,7 +31,7 @@ for server in "${servers[@]}"; do
 
         # git pull 실행
         echo "Running git pull on $server in repository $repo_name"
-        git pull
+        git pull --rebase
 
         # 브랜치 체크아웃
         echo "Checking out branch $current_branch on $server"
