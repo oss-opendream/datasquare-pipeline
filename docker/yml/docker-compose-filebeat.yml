@@ -10,4 +10,5 @@ services:
     #   - strict.perms=false
     restart: always
     command : 
+      - -e
       - --strict.perms=false
