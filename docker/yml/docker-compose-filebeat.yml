@@ -9,3 +9,5 @@ services:
     # environment:
     #   - strict.perms=false
     restart: always
+    command : 
+      - --strict.perms=false
