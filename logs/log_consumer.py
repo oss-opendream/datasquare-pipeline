@@ -2,6 +2,7 @@ import configparser
 import os
 import socket
 import re
+import json
 
 from confluent_kafka import Consumer
 from minio import Minio
@@ -45,7 +46,7 @@ if __name__ == '__main__':
     bucket_name = parser.get("MINIO_CREDENTIALS", "BUCKET")
 
     # Create MinIO instance
-    minio_client = Minio('localhost:9000',
+    minio_client = Minio('server3:9000',
                          access_key=access_key,
                          secret_key=secret_key,
                          secure=False)
@@ -69,11 +70,9 @@ if __name__ == '__main__':
             if msg is None:
                 continue
 
-            # ic(msg.value())
-
-            message_value = msg.value().decode('utf-8')
-
-            # ic(message_value)
+            consumed_message = msg.value().decode('utf-8')
+            message_value = json.loads(consumed_message)['message']
+            print(message_value)
             
             if current_file_name is None:
                 # 첫 번째 메시지에서 파일 이름을 결정합니다.
