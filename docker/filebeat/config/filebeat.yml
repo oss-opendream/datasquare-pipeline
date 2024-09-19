@@ -1,6 +1,6 @@
 filebeat.inputs:
-  - type: log
-    enabled: true
+  - type: filestream
+    id: filebeat
     paths: /usr/share/filebeat/fastapi.log
 
 # logging.level: debug
@@ -19,7 +19,7 @@ output.kafka:
   # topic: '%{[fields.log_topic]}'
   topic: 'datasquare_web_log'
   partition.round_robin:
-    reachable_only: false
+    reachable_only: true
 
   required_acks: 1
   compression: gzip
