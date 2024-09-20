@@ -30,7 +30,7 @@ services:
       KAFKA_CONFLUENT_CONSUMER_LAG_EMITTER_ENABLED: 'true'
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
       KAFKA_AUTO_LEADER_REBALANCE_ENABLE: 'true'
-      KAFKA_LOG_RETENTION_MS: 10
+      KAFKA_OFFSETS_RETENTION_MINUTES: 1
     volumes:
       - kafka_log:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
