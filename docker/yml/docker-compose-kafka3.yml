@@ -16,7 +16,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://server3:29092,PLAINTEXT_HOST://server3:9092'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
       KAFKA_PROCESS_ROLES: 'broker,controller'
       KAFKA_JMX_PORT: 9101
@@ -31,6 +31,7 @@ services:
       KAFKA_CONFLUENT_CONSUMER_LAG_EMITTER_ENABLED: 'true'
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
       KAFKA_AUTO_LEADER_REBALANCE_ENABLE: 'true'
+      KAFKA_LOG_RETENTION_MS: 10
     volumes:
       - kafka_log:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
@@ -42,6 +43,6 @@ services:
         max-size: 1k
         max-file: 3
         tag: "kakfa-3" # labels의 하위호환
-        
+
 volumes:
   kafka_log: 
