@@ -1,0 +1,12 @@
+services:
+    
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - "8989:8999"
+    restart: always
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_METRICS_PORT=8999
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=server1:9092,server2:9092,server3:9092
