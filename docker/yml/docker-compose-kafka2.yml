@@ -17,7 +17,7 @@ services:
       KAFKA_JMX_HOSTNAME: server2
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
       KAFKA_PROCESS_ROLES: 'broker,controller'
       KAFKA_CONTROLLER_QUORUM_VOTERS: '1@server1:29093,2@server2:29093, 3@server3:29093'
@@ -30,6 +30,7 @@ services:
       KAFKA_CONFLUENT_CONSUMER_LAG_EMITTER_ENABLED: 'true'
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
       KAFKA_AUTO_LEADER_REBALANCE_ENABLE: 'true'
+      KAFKA_LOG_RETENTION_MS: 10
     volumes:
       - kafka_log:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
@@ -40,6 +41,6 @@ services:
       options:
         max-size: 1k
         max-file: 3
-        tag: "kakfa-3" # labels의 하위호환
+        tag: "kakfa-2" # labels의 하위호환
 volumes:
   kafka_log: 
