@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        server: ['server1', 'server2', 'server3']
+        server: ['10.178.0.3','10.178.0.4','10.178.0.5']
 
     steps:
       - name: Checkout code
