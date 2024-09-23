@@ -40,8 +40,8 @@ services:
     logging:
       driver: json-file
       options:
-        max-size: 1k
-        max-file: 3
+        max-size: 1m
+        max-file: 10
         tag: "kakfa-3" # labels의 하위호환
 
 volumes:
