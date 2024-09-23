@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     # Create Consumer instance
     consumer = Consumer(kafka_config)
-    topics = ["datasquare_web_log"]
+    topics = ["datasquare_web_log2"]
     consumer.subscribe(topics)
 
     # File management setup
@@ -71,27 +71,30 @@ if __name__ == '__main__':
                 continue
 
             consumed_message = msg.value().decode('utf-8')
-            message_value = json.loads(consumed_message)['message']
-            print(message_value)
-            
-            if current_file_name is None:
-                # 첫 번째 메시지에서 파일 이름을 결정합니다.
-                datetime_str = parse_datetime_from_message(message_value)
-                current_file_name = f"{datetime_str}_datasquare.log"
-                file_path = os.path.join(file_dir, current_file_name)
-                rot_file_handler = FileRotator(
-                    base_filename=file_path, interval_seconds=30, max_bytes=50*1024*1024)
+            try:
+                message_value = json.loads(consumed_message)['message']
+                print(message_value)
                 
-            # 메시지를 파일에 씁니다.
-            if rot_file_handler.write(message_value + "\n"):
-               
-                # 회전된 파일을 MinIO에 업로드합니다.
-                minio_client.fput_object(bucket_name=bucket_name,
-                                         object_name=current_file_name,
-                                         file_path=file_path)
+                if current_file_name is None:
+                    # 첫 번째 메시지에서 파일 이름을 결정합니다.
+                    datetime_str = parse_datetime_from_message(message_value)
+                    current_file_name = f"{datetime_str}_datasquare.log"
+                    file_path = os.path.join(file_dir, current_file_name)
+                    rot_file_handler = FileRotator(
+                        base_filename=file_path, interval_seconds=30, max_bytes=50*1024*1024)
+                    
+                # 메시지를 파일에 씁니다.
+                if rot_file_handler.write(message_value + "\n"):
+                
+                    # 회전된 파일을 MinIO에 업로드합니다.
+                    minio_client.fput_object(bucket_name=bucket_name,
+                                            object_name=current_file_name,
+                                            file_path=file_path)
 
-                # 기존 파일 이름을 초기화합니다.
-                current_file_name = None
+                    # 기존 파일 이름을 초기화합니다.
+                    current_file_name = None
+            except:
+                pass
 
     except KeyboardInterrupt:
         print("Kafka consumer interrupted.")
