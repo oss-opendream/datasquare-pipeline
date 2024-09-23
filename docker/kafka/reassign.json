@@ -1,0 +1,10 @@
+{
+    "version" : 1,
+    "partitions" : [
+        {"topic" : "datasquare_web_log", "partition" : 0, "replicas": [3, 2, 1]},
+        {"topic" : "datasquare_web_log", "partition" : 1, "replicas": [1, 3, 2]},
+        {"topic" : "datasquare_web_log", "partition" : 2, "replicas": [2, 1, 3]},
+        {"topic" : "__consumer_offsets", "partition" : 28, "replicas": [3, 2, 1]},
+        {"topic" : "__consumer_offsets", "partition" : 49, "replicas": [2, 1, 3]}
+    ]
+}
