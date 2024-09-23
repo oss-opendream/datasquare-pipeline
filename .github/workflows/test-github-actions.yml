@@ -41,11 +41,11 @@ jobs:
         run: |
           git fetch origin dev
           if git merge-base --is-ancestor origin/dev HEAD; then
-            echo "Branch is derived from dev."
-            echo "continue=true" >> $GITHUB_ENV
-          else
             echo "Branch is not derived from dev."
             echo "continue=false" >> $GITHUB_ENV
+          else
+            echo "Branch is derived from dev."
+            echo "continue=true" >> $GITHUB_ENV
           fi
 
       - name: Pull latest changes on server
