@@ -52,6 +52,9 @@ jobs:
         if: env.continue == 'true'
         run: |
           echo ${{matrix.server}}
+          sudo -i 
+          su 20yoonjae
+          whoami
           hostname -I
         # ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git pull"
       #   env:
