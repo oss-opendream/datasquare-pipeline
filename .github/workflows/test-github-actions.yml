@@ -9,9 +9,9 @@ jobs:
   deploy:
     runs-on: [self-hosted]
 
-    strategy:
-      matrix:
-        server: ['server1', 'server2','server3']
+    # strategy:
+    #   matrix:
+    #     server: ['server1', 'server2','server3']
 
     steps:
       - name: Checkout code
@@ -38,5 +38,9 @@ jobs:
       
       - name: SSH connect 
         run: |
-          ssh 20yoonjae@${{ matrix.server }} "whoami"
-        # sudo -u $username ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git stash && git pull"
+          ssh $username@server1 "cd ~/datasquare-pipeline && git stash && git pull"
+          echo server1 Succeeded
+          ssh $username@server2 "cd ~/datasquare-pipeline && git stash && git pull"
+          echo server2 Succeeded
+          ssh $username@server3 "cd ~/datasquare-pipeline && git stash && git pull"
+          echo server3 Succeeded
