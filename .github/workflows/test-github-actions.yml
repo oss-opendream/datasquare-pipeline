@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        server: ['10.178.0.3', '10.178.0.4', '10.178.0.5']
+        server: ['server1', 'server2', 'server3']
 
     steps:
       - name: Checkout code
@@ -23,6 +23,18 @@ jobs:
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           echo "$COMMIT_MESSAGE"
           username=$(echo "$COMMIT_MESSAGE" | cut -d ':' -f 1 | tr -d ' ')
+          echo "username=${username}" >> $GITHUB_ENV
+
+          # 유효한 사용자 목록
+          VALID_USERS=("20yoonjae" "yeonhlee" "ds_wp")
+
+          # 사용자 확인
+          if [[ ! " ${VALID_USERS[@]} " =~ " ${username} " ]]; then
+            echo "Invalid user: $username"
+            exit 1
+          fi
+
+          echo "Valid user: $username"
         # echo $username
         # sudo su $username
         # sudo -u $username whoami
