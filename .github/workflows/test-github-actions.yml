@@ -3,7 +3,7 @@ name: push&pull
 on:
   push:
     branches:
-      - '**'
+      - '*'
 
 jobs:
   deploy:
@@ -38,9 +38,9 @@ jobs:
       
       - name: SSH connect 
         run: |
-          ssh $username@server1 "cd ~/datasquare-pipeline && git stash && git pull"
+          ssh $username@server1 "cd ~/datasquare-pipeline && git stash  && git pull"
           echo server1 Succeeded
-          ssh $username@server2 "cd ~/datasquare-pipeline && git stash && git pull"
+          ssh $username@server2 "cd ~/datasquare-pipeline && git stash && git checkout ${GITHUB_REF##*/} && git pull"
           echo server2 Succeeded
           ssh $username@server3 "cd ~/datasquare-pipeline && git stash && git pull"
           echo server3 Succeeded
