@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        server: ['10.178.0.3','10.178.0.4','10.178.0.5']
+        server: ['server1', 'server2','server3']
 
     steps:
       - name: Checkout code
@@ -38,5 +38,5 @@ jobs:
       
       - name: SSH connect 
         run: |
-          sudo -u 20yoonjae ssh -o StrictHostKeyChecking=no 20yoonjae@server1 "whoami"
+          ssh 20yoonjae@${{ matrix.server }} "whoami"
         # sudo -u $username ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git stash && git pull"
