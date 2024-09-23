@@ -22,7 +22,7 @@ jobs:
           whoami
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           echo "$COMMIT_MESSAGE"
-          username=$(echo "$commit_message" | cut -d ':' -f 1 | tr -d ' ')
+          username=$(echo "$COMMIT_MESSAGE" | cut -d ':' -f 1 | tr -d ' ')
           echo $username
           sudo su $username
           whoami
