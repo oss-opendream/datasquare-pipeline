@@ -1,0 +1,63 @@
+# name: test-actions
+# on:
+#   push:
+#     branch:
+#       - 'github_action'
+
+# jobs:
+#   print-ip:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: checkout code
+#         uses: actions/checkout@v3
+
+
+#       - name: Print
+#         run: |
+#           echo hihi
+
+name: test-actions
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        server: ['10.178.0.3', '10.178.0.4', '10.178.0.5']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check if branch is derived from dev
+        id: check-dev-branch
+        run: |
+          git fetch origin dev
+          if git merge-base --is-ancestor origin/dev HEAD; then
+            echo "Branch is derived from dev."
+            echo "continue=true" >> $GITHUB_ENV
+          else
+            echo "Branch is not derived from dev."
+            echo "continue=false" >> $GITHUB_ENV
+          fi
+
+      - name: Pull latest changes on server
+        if: env.continue == 'true'
+        run: |
+          echo ${{matrix.server}}
+        # ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git pull"
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     SERVER_USER: ${{ secrets.SERVER_USER }}
+      #     SERVER_HOST: ${{ matrix.server }}
+
+      # - name: Test pull result
+      #   if: env.continue == 'true'
+      #   run: echo "Pull completed on ${{ matrix.server }}"
