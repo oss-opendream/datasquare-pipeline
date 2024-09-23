@@ -36,12 +36,17 @@ services:
       KAFKA_OFFSETS_RETENTION_MINUTES: 1
       
       # KAFKA_LOG_RETENTION_MS: 10
-      
-
     volumes:
       - kafka_log:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
       - ../connect/libs/jmx_prometheus_javaagent-0.19.0.jar:/opt/kafka/libs/jmx_prometheus_javaagent-0.19.0.jar
+    
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: 10
+        tag: "kakfa-1" # labels의 하위호환
 
 volumes:
   kafka_log:
