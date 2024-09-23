@@ -52,7 +52,7 @@ jobs:
         if: env.continue == 'true'
         run: |
           echo ${{matrix.server}}
-          ip addr
+          hostname -I
         # ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git pull"
       #   env:
       #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
