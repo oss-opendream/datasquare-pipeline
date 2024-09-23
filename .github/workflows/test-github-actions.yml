@@ -19,8 +19,15 @@ jobs:
 
       - name: Change User
         run: |
+          whoami
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           echo "$COMMIT_MESSAGE"
+          username=$(echo "$commit_message" | cut -d ':' -f 1 | tr -d ' ')
+          echo $username
+          sudo -i 
+          su $username
+          whoami
+          
 
       - name: Check if branch is derived from dev
         id: check-dev-branch
@@ -43,10 +50,10 @@ jobs:
       #     whoami
       #     hostname -I
       
-      - name: SSH connect 
-        run: |
-          echo ${{ matrix.server }}
-          ssh ${{ matrix.server }}
+      # - name: SSH connect 
+      #   run: |
+      #     echo ${{ matrix.server }}
+      #     ssh ${{ matrix.server }}
         # ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git stash && git pull"
         # ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git pull"
       #   env:
