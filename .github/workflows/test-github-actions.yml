@@ -25,7 +25,7 @@ jobs:
           username=$(echo "$COMMIT_MESSAGE" | cut -d ':' -f 1 | tr -d ' ')
           echo $username
           sudo su $username
-          whoami
+          sudo -u $username whoami
           
 
       - name: Check if branch is derived from dev
