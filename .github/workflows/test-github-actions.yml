@@ -1,4 +1,4 @@
-name: test-actions
+name: push&pull
 
 on:
   push:
@@ -35,42 +35,8 @@ jobs:
           fi
 
           echo "Valid user: $username"
-        # echo $username
-        # sudo su $username
-        # sudo -u $username whoami
-          
-
-      # - name: Check if branch is derived from dev
-      #   id: check-dev-branch
-      #   run: |
-      #     git fetch origin dev
-      #     if git merge-base --is-ancestor origin/dev HEAD; then
-      #       echo "Branch is not derived from dev."
-      #       echo "continue=false" >> $GITHUB_ENV
-      #     else
-      #       echo "Branch is derived from dev."
-      #       echo "continue=true" >> $GITHUB_ENV
-      #     fi
-
-      # - name: Pull latest changes on server
-      #   if: env.continue == 'true'
-      #   run: |
-      #     echo ${{matrix.server}}
-      #     sudo -i 
-      #     cut -f1 -d: /etc/passwd | tail -5
-      #     whoami
-      #     hostname -I
       
       - name: SSH connect 
         run: |
           echo ${{ matrix.server }}
           sudo -u username ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git stash && git pull"
-        # ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git pull"
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     SERVER_USER: ${{ secrets.SERVER_USER }}
-      #     SERVER_HOST: ${{ matrix.server }}
-
-      # - name: Test pull result
-      #   if: env.continue == 'true'
-      #   run: echo "Pull completed on ${{ matrix.server }}"
