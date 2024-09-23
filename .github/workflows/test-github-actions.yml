@@ -38,6 +38,6 @@ jobs:
       
       - name: SSH connect 
         run: |
-          sudo -u $username ssh ${{ matrix.server }} "hostname -I"
-        
+          sudo -u 20yoonjae ssh -o StrictHostKeyChecking=no 20yoonjae@server1 "whoami"
+        # sudo -u $username ssh ${{ matrix.server }} "hostname -I"
         # sudo -u $username ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git stash && git pull"
