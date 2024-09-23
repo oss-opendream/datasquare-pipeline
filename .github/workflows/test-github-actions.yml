@@ -39,4 +39,4 @@ jobs:
       - name: SSH connect 
         run: |
           echo ${{ matrix.server }}
-          sudo -u username ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git stash && git pull"
+          sudo -u $username ssh ${{ matrix.server }} "cd ~/datasquare-pipeline && git stash && git pull"
