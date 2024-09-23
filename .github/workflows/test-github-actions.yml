@@ -24,8 +24,7 @@ jobs:
           echo "$COMMIT_MESSAGE"
           username=$(echo "$commit_message" | cut -d ':' -f 1 | tr -d ' ')
           echo $username
-          sudo -i 
-          su $username
+          sudo su $username
           whoami
           
 
