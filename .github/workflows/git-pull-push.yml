@@ -20,7 +20,7 @@ jobs:
       - name: Change User
         run: |
           whoami
-          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B ${GITHUB_REF##*/})
           echo "$COMMIT_MESSAGE"
           username=$(echo "$COMMIT_MESSAGE" | cut -d ':' -f 1 | tr -d ' ')
           echo "username=${username}" >> $GITHUB_ENV
