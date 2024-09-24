@@ -17,7 +17,7 @@ jobs:
         run: |
           whoami
           BRANCH_NAME=$(echo "${GITHUB_REF}" | sed 's#refs/heads/##')
-          cd datasquare-pipeline
+          cd ~/datasquare-pipeline
           git checkout $BRANCH_NAME
           COMMIT_MESSAGE=$(git log -1 --pretty=%B $BRANCH_NAME)
           echo "$COMMIT_MESSAGE"
