@@ -16,7 +16,9 @@ jobs:
       - name: Change User
         run: |
           whoami
-          echo ${GITHUB_REF##*/}
+          echo ${GITHUB_REF}
+          cd datasquare-pipeline
+          git checkout ${GITHUB_REF##*/}
           COMMIT_MESSAGE=$(git log -1 --pretty=%B ${GITHUB_REF##*/})
           echo "$COMMIT_MESSAGE"
           username=$(echo "$COMMIT_MESSAGE" | cut -d ':' -f 1 | tr -d ' ')
