@@ -9,10 +9,6 @@ jobs:
   deploy:
     runs-on: [self-hosted]
 
-    # strategy:
-    #   matrix:
-    #     server: ['server1', 'server2','server3']
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
