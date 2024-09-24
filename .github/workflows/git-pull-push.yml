@@ -3,7 +3,7 @@ name: push&pull
 on:
   push:
     branches:
-      - '*'
+      - '**'
 
 jobs:
   deploy:
