@@ -19,6 +19,7 @@ jobs:
           BRANCH_NAME=$(echo "${GITHUB_REF}" | sed 's#refs/heads/##')
           cd ~/datasquare-pipeline
           git checkout $BRANCH_NAME
+          git pull
           COMMIT_MESSAGE=$(git log -1 --pretty=%B $BRANCH_NAME)
           echo "$COMMIT_MESSAGE"
           username=$(echo "$COMMIT_MESSAGE" | cut -d ':' -f 1 | tr -d ' ')
