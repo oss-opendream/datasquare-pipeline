@@ -1,0 +1,46 @@
+name: push&pull
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  deploy:
+    runs-on: [self-hosted]
+
+    # strategy:
+    #   matrix:
+    #     server: ['server1', 'server2','server3']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Change User
+        run: |
+          whoami
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "$COMMIT_MESSAGE"
+          username=$(echo "$COMMIT_MESSAGE" | cut -d ':' -f 1 | tr -d ' ')
+          echo "username=${username}" >> $GITHUB_ENV
+
+          # 유효한 사용자 목록
+          VALID_USERS=("20yoonjae" "yeonhlee" "ds_wp")
+
+          # 사용자 확인
+          if [[ ! " ${VALID_USERS[@]} " =~ " ${username} " ]]; then
+            echo "Invalid user: $username"
+            exit 1
+          fi
+
+          echo "Valid user: $username"
+      
+      - name: SSH connect 
+        run: |
+          ssh $username@server1 "cd ~/datasquare-pipeline && git stash && git checkout ${GITHUB_REF##*/} && git pull"
+          echo server1 Succeeded
+          ssh $username@server2 "cd ~/datasquare-pipeline && git stash && git checkout ${GITHUB_REF##*/} && git pull"
+          echo server2 Succeeded
+          ssh $username@server3 "cd ~/datasquare-pipeline && git stash && git checkout ${GITHUB_REF##*/} && git pull"
+          echo server3 Succeeded
