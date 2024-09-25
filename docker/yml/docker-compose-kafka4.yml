@@ -1,30 +1,30 @@
 services:
 
-  broker1:
+  broker4:
     image: confluentinc/cp-kafka:7.7.0
-    hostname: broker1
-    container_name: broker1
+    hostname: broker4
+    container_name: broker4
     ports:
       - "8081:8080"
-      - "9093:9092"
-      - "9102:9102"
-      - "29094:29094"
-      - "29095:29095"
+      - "9093:9093"
+      - "9102:9101"
+      - "39093:39093"
+      - "39092:39092"
     environment:
       KAFKA_NODE_ID: 4
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://server3:29094,PLAINTEXT_HOST://server3:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://server3:39092,PLAINTEXT_HOST://server3:9093'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
-      KAFKA_PROCESS_ROLES: 'broker'
-      KAFKA_JMX_PORT: 9102
+      KAFKA_PROCESS_ROLES: 'broker, controller'
+      KAFKA_JMX_PORT: 9101
       KAFKA_JMX_HOSTNAME: server3
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@server1:29093,2@server2:29093, 3@server3:29093'
-      KAFKA_LISTENERS: 'PLAINTEXT://broker1:29095,PLAINTEXT_HOST://0.0.0.0:9093'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@server1:29093,2@server2:29093, 3@server3:29093, 4@server3:39093'
+      KAFKA_LISTENERS: 'PLAINTEXT://broker4:39092,PLAINTEXT_HOST://0.0.0.0:9093,CONTROLLER://broker4:39093'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
-      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER' 
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LOG_DIRS: '/var/lib/kafka/data/kraft-combined-logs'
       CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
       # KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
