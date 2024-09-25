@@ -1,52 +1,49 @@
 services:
-  
-  broker:
+
+  broker1:
     image: confluentinc/cp-kafka:7.7.0
-    hostname: broker
-    container_name: broker
+    hostname: broker1
+    container_name: broker1
     ports:
-      - "8080:8080"
-      - "9092:9092"
-      - "9101:9101"
-      - "29093:29093"
-      - "29092:29092"
+      - "8081:8080"
+      - "9093:9093"
+      - "9102:9102"
+      - "29094:29094"
+      - "29095:29095"
     environment:
-      KAFKA_NODE_ID: 1
+      KAFKA_NODE_ID: 4
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://server1:29092,PLAINTEXT_HOST://server1:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://server3:29094,PLAINTEXT_HOST://server3:9093'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
       KAFKA_PROCESS_ROLES: 'broker,controller'
-      KAFKA_JMX_PORT: 9101
-      KAFKA_JMX_HOSTNAME: server1
+      KAFKA_JMX_PORT: 9102
+      KAFKA_JMX_HOSTNAME: server3
       KAFKA_CONTROLLER_QUORUM_VOTERS: '1@server1:29093,2@server2:29093, 3@server3:29093, 4@server3:29094'
-      KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
+      KAFKA_LISTENERS: 'PLAINTEXT://broker1:29095,CONTROLLER://broker1:29094,PLAINTEXT_HOST://0.0.0.0:9093'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LOG_DIRS: '/var/lib/kafka/data/kraft-combined-logs'
+      CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
+      # KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
+      EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
       KAFKA_CONFLUENT_CONSUMER_LAG_EMITTER_ENABLED: 'true'
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
-      # Replace CLUSTER_ID with a unique base64 UUID using "bin/kafka-storage.sh random-uuid" 
-      # See https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-storage-sh
-      CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
-      EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
       KAFKA_AUTO_LEADER_REBALANCE_ENABLE: 'true'
       KAFKA_OFFSETS_RETENTION_MINUTES: 1
-      
-      # KAFKA_LOG_RETENTION_MS: 10
     volumes:
-      - kafka_log:/var/lib/kafka/data
+      - kafka_log_4:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
       - ../connect/libs/jmx_prometheus_javaagent-0.19.0.jar:/opt/kafka/libs/jmx_prometheus_javaagent-0.19.0.jar
-    
+
     logging:
       driver: json-file
       options:
         max-size: 1m
         max-file: 10
-        tag: "kakfa-1" # labels의 하위호환
+        tag: "kakfa-4" # labels의 하위호환
 
 volumes:
-  kafka_log:
+  kafka_log_4: 
