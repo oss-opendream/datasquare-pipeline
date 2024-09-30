@@ -1,9 +1,9 @@
 services:
 
-  broker:
+  broker2:
     image: confluentinc/cp-kafka:7.7.0
-    hostname: broker
-    container_name: broker
+    hostname: broker2
+    container_name: broker2
     ports:
       - "8080:8080"
       - "9092:9092"
@@ -24,7 +24,7 @@ services:
       KAFKA_JMX_HOSTNAME: kafka2
       # KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:29093,2@kafka2:29093, 3@kafka3:29093, 4@kafka3:39093'
       KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:29093,2@kafka2:29093, 3@kafka3:29093'
-      KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
+      KAFKA_LISTENERS: 'PLAINTEXT://broker2:29092,CONTROLLER://broker2:29093,PLAINTEXT_HOST://0.0.0.0:9092'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LOG_DIRS: '/var/lib/kafka/data/kraft-combined-logs'
