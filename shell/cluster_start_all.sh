@@ -6,9 +6,10 @@ servers=( \
   "kafka2" \
   "kafka3" \
   # "ds-server" \
-  # "prom-elk" \
-  # "minio1" \
+  # "elk" \
+  # "minio" \
   )
+
 
 # 서버에 맞는 compose 파일 배열
 compose_files=( \
@@ -40,4 +41,4 @@ done
 
 
 # Kafka Topic 생성 Python script 실행
-~/.pyenv/versions/ds_env/bin/python ~/datasquare-pipeline/logs/check_topic.py
+/usr/local/pyenv/versions/ds_env/bin/python ~/datasquare-pipeline/logs/check_topic.py
