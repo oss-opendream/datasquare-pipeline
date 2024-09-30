@@ -1,11 +1,11 @@
 include:
   - path:
     - docker-compose-kafka1.yml
-    - docker-compose-monitoring.yml
-    - docker-compose-node_exporter.yml
-    - docker-compose-kafka_exporter.yml
-    - docker-compose-filebeat.yml
+      #    - docker-compose-monitoring.yml
+      #    - docker-compose-node_exporter.yml
+      #    - docker-compose-kafka_exporter.yml
+      #    - docker-compose-filebeat.yml
   - extra_hosts:
-    - "server1:10.178.0.3"
-    - "server2:10.178.0.4"
-    - "server3:10.178.0.5"
+    - "kafka1:10.178.0.11"
+    - "kafka2:10.178.0.12"
+    - "kafka3:10.178.0.13"
