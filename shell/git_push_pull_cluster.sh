@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 서버 목록 설정
-servers=("kafka1" "kafka2" "kafka3" "kafka4" "minio" "elk" "ds_server" "ds_db")
+servers=("kafka1" "kafka2" "kafka3" "kafka4" "minio" "elk" "ds-server" "ds-db")
 
 # 현재 서버에서 git push 및 git pull 실행
 echo "Running git push and pull on current server"

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # 서버 배열
-servers=("kafka1" "kafka2" "kafka3" "kafka")
+servers=("kafka1" "kafka2" "kafka3")
 
 # 서버에 맞는 compose 파일 배열
-compose_files=("docker-compose-kafka1.yml" "docker-compose-kafka2.yml" "docker-compose-kafka3.yml" "docker-compose-kafka4.yml")
+compose_files=("docker-compose-kafka1.yml" "docker-compose-kafka2.yml" "docker-compose-kafka3.yml")
 
 # 반복문을 사용하여 서버별로 docker-compose 명령 실행
 for i in ${!servers[@]}; do

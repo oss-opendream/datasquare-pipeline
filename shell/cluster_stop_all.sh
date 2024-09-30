@@ -1,6 +1,6 @@
 #!/bin/bash
 # 서버 배열
-servers=("kafka1" "kafka2" "kafka3" "kafka4" "minio" "elk" "ds_server" "ds_db")
+servers=("kafka1" "kafka2" "kafka3" "kafka4" "minio" "elk")
 
 # 서버에 맞는 compose 파일 배열
 compose_files=("docker-compose-server1.yml" "docker-compose-server2.yml" "docker-compose-server3.yml" "docker-compose-server4.yml")
