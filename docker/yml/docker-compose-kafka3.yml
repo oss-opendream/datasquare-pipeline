@@ -21,13 +21,15 @@ services:
       KAFKA_PROCESS_ROLES: 'broker,controller'
       KAFKA_JMX_PORT: 9101
       KAFKA_JMX_HOSTNAME: server3
+      # KAFKA_CONTROLLER_QUORUM_VOTERS: '1@server1:29093,2@server2:29093, 3@server3:29093, 4@server3:39093'
       KAFKA_CONTROLLER_QUORUM_VOTERS: '1@server1:29093,2@server2:29093, 3@server3:29093'
       KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LOG_DIRS: '/var/lib/kafka/data/kraft-combined-logs'
       CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
-      KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
+      # KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
+      EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
       KAFKA_CONFLUENT_CONSUMER_LAG_EMITTER_ENABLED: 'true'
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
       KAFKA_AUTO_LEADER_REBALANCE_ENABLE: 'true'
@@ -43,6 +45,8 @@ services:
         max-size: 1m
         max-file: 10
         tag: "kakfa-3" # labels의 하위호환
+
+
 
 volumes:
   kafka_log: 

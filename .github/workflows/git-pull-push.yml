@@ -3,15 +3,11 @@ name: push&pull
 on:
   push:
     branches:
-      - '*'
+      - '**'
 
 jobs:
   deploy:
     runs-on: [self-hosted]
-
-    # strategy:
-    #   matrix:
-    #     server: ['server1', 'server2','server3']
 
     steps:
       - name: Checkout code
@@ -20,7 +16,11 @@ jobs:
       - name: Change User
         run: |
           whoami
-          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          BRANCH_NAME=$(echo "${GITHUB_REF}" | sed 's#refs/heads/##')
+          cd ~/datasquare-pipeline
+          git checkout $BRANCH_NAME
+          git pull
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B $BRANCH_NAME)
           echo "$COMMIT_MESSAGE"
           username=$(echo "$COMMIT_MESSAGE" | cut -d ':' -f 1 | tr -d ' ')
           echo "username=${username}" >> $GITHUB_ENV
@@ -38,9 +38,9 @@ jobs:
       
       - name: SSH connect 
         run: |
-          ssh $username@server1 "cd ~/datasquare-pipeline && git stash && git checkout ${GITHUB_REF##*/} && git pull"
+          ssh $username@server1 "cd ~/datasquare-pipeline && git stash && git checkout $BRANCH_NAME && git pull"
           echo server1 Succeeded
-          ssh $username@server2 "cd ~/datasquare-pipeline && git stash && git checkout ${GITHUB_REF##*/} && git pull"
+          ssh $username@server2 "cd ~/datasquare-pipeline && git stash && git checkout $BRANCH_NAME && git pull"
           echo server2 Succeeded
-          ssh $username@server3 "cd ~/datasquare-pipeline && git stash && git checkout ${GITHUB_REF##*/} && git pull"
+          ssh $username@server3 "cd ~/datasquare-pipeline && git stash && git checkout $BRANCH_NAME && git pull"
           echo server3 Succeeded

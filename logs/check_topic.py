@@ -8,19 +8,21 @@ if __name__ == '__main__':
     kadmin = AdminClient(conf)
     topic_dict = kadmin.list_topics().topics
 
-    topic_name = 'datasquare_web_log'
+    topic_name = 'datasquare_web_log2'
 
-    while len(topic_dict) <= 1:
-        print('Bootstrap servers are not ready yet. \nRetry after 5 seconds')
-        time.sleep(5)
-        kadmin = AdminClient(conf)
-        topic_dict = kadmin.list_topics().topics
+    # while len(topic_dict) <= 1:
+    #     print('Bootstrap servers are not ready yet. \nRetry after 5 seconds')
+    #     time.sleep(5)
+    #     kadmin = AdminClient(conf)
+    #     topic_dict = kadmin.list_topics().topics
 
     if topic_name in topic_dict:
         print(f"'{topic_name}' topic found")
 
     else:
         print(f"'{topic_name}' topic not found. \nNew topic '{topic_name}' will be created.")
+        time.sleep(2)
+        print("make topic")
         new_topic = kadmin.create_topics([NewTopic(topic_name, num_partitions=3, replication_factor= 3)])
 
     time.sleep(5)
