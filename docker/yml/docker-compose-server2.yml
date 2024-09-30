@@ -1,9 +1,0 @@
-include:
-  - path:
-    - docker-compose-kafka2.yml
-      #    - docker-compose-elk.yml
-      #    - docker-compose-node_exporter.yml
-  - extra_hosts:
-    - "kafka1:10.178.0.11"
-    - "kafka2:10.178.0.12"
-    - "kafka3:10.178.0.13"
