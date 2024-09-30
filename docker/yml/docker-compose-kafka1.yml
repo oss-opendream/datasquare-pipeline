@@ -1,5 +1,5 @@
 services:
-  
+
   broker1:
     image: confluentinc/cp-kafka:7.7.0
     hostname: broker1
@@ -10,6 +10,7 @@ services:
       - "9101:9101"
       - "29093:29093"
       - "29092:29092"
+    
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
@@ -35,15 +36,12 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
       KAFKA_AUTO_LEADER_REBALANCE_ENABLE: 'true'
       KAFKA_OFFSETS_RETENTION_MINUTES: 1
+      KAFKA_ELECTION_TIMEOUT_MS: 5000
       # Replace CLUSTER_ID with a unique base64 UUID using "bin/kafka-storage.sh random-uuid" 
       # See https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-storage-sh
       # KAFKA_LOG_RETENTION_MS: 10
-
-      ##########
-      KAFKA_ELECTION_TIMEOUT_MS: 5000
+    
     command: ["sh", "-c", "sleep 15 && /etc/confluent/docker/run"]
-    #########
-
     volumes:
       - kafka_log:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
