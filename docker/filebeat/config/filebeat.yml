@@ -13,12 +13,12 @@ filebeat.inputs:
 
 output.kafka:
   # initial brokers for reading cluster metadata
-  hosts: ["server1:9092", "server2:9092", "server3:9092"]
-  # hosts: ["server2:9092"]
+  hosts: ["kafka1:9092", "kafka2:9092", "kafka3:9092", "kafka4:9092"]
+  # hosts: ["kafka2:9092"]
 
   # message topic selection + partitioning
   # topic: '%{[fields.log_topic]}'
-  topic: 'datasquare_web_log2'
+  topic: 'datasquare_web_log'
   partition.round_robin:
     reachable_only: true
 

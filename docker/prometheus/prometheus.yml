@@ -26,26 +26,26 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-    - targets: ['server1:8080','server2:8080', 'server3:8080']
+      - targets: ['kakfa1:8080','kakfa2:8080', 'kakfa3:8080','kafka4:8080']
 
   - job_name: 'minio-job'
     bearer_token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoiYWRtaW4iLCJleHAiOjQ4NzkyMTI2NTN9.E0IfGkHd8SXVt3KmbDrAb6uRoFILmS2chFBEJupsE7fuIY9KVJYcYBXpYpexarjrLzBXHXIA5xIbGafErw7VdA'
     metrics_path: '/minio/v2/metrics/cluster'
     scheme: 'http'
     static_configs:
-    - targets: ['server3:9000']
+    - targets: ['minio:9000']
 
   - job_name: 'minio-job-bucket'
     bearer_token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoiYWRtaW4iLCJleHAiOjQ4NzkyMTI2NTN9.E0IfGkHd8SXVt3KmbDrAb6uRoFILmS2chFBEJupsE7fuIY9KVJYcYBXpYpexarjrLzBXHXIA5xIbGafErw7VdA'
     metrics_path: '/minio/v2/metrics/bucket'
     scheme: 'http'
     static_configs:
-    - targets: ['server3:9000']
+    - targets: ['minio:9000']
 
   - job_name: 'node-exporter'
     static_configs:
-    - targets: ['server1:9100', 'server2:9100', 'server3:9100']
+    - targets: ['kakfa1:9100', 'kakfa2:9100', 'kakfa3:9100','kakfa4:9100']
 
   - job_name: 'kafka-exporter'
     static_configs:
-    - targets: ['server1:9308']
+    - targets: ['kakfa1:9308']
