@@ -6,7 +6,7 @@ services:
     container_name: broker4
     ports:
       - "8081:8080"
-      - "9093:9093"
+      - "9093:9092"
       - "9102:9101"
       - "39093:39093"
       - "39092:39092"
@@ -22,7 +22,7 @@ services:
       KAFKA_JMX_PORT: 9101
       KAFKA_JMX_HOSTNAME: server3
       KAFKA_CONTROLLER_QUORUM_VOTERS: '1@server1:29093,2@server2:29093, 3@server3:29093, 4@server3:39093'
-      KAFKA_LISTENERS: 'PLAINTEXT://broker4:39092,PLAINTEXT_HOST://0.0.0.0:9093,CONTROLLER://broker4:39093'
+      KAFKA_LISTENERS: 'PLAINTEXT://broker4:39092,PLAINTEXT_HOST://0.0.0.0:9092,CONTROLLER://broker4:39093'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LOG_DIRS: '/var/lib/kafka/data/kraft-combined-logs'
