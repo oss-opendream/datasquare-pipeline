@@ -1,6 +1,6 @@
 include:
   - path:
-    - ../src/docker-compose-kafka2.yml
+    - ../docker-compose-kafka2.yml
     # - ../docker-compose-node_exporter.yml
   - extra_hosts:
     - "kafka1:10.178.0.11"
