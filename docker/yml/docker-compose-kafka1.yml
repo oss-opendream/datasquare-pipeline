@@ -28,7 +28,8 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_LOG_DIRS: '/var/lib/kafka/data/kraft-combined-logs'
       CLUSTER_ID: 'TeSi-wM2RYORkvQHhvR5NQ'
-      EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
+      KAFKA_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
+      # EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.19.0.jar=8080:/usr/share/jmx_exporter/kafka-broker.yml
       KAFKA_CONFLUENT_CONSUMER_LAG_EMITTER_ENABLED: 'true'
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
       KAFKA_AUTO_LEADER_REBALANCE_ENABLE: 'true'
