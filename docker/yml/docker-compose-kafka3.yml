@@ -46,7 +46,5 @@ services:
         max-file: 10
         tag: "kakfa-3" # labels의 하위호환
 
-
-
 volumes:
-  kafka_log: 
+  kafka_log:
