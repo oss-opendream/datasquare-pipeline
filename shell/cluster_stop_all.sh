@@ -5,9 +5,9 @@ servers=( \
   "kafka1" \
   "kafka2" \
   "kafka3" \
-  # "ds-server" \
-  # "elk" \
-  # "minio" \
+  "ds-server" \
+  "elk" \
+  "minio" \
   )
 
 # 서버에 맞는 compose 파일 배열
