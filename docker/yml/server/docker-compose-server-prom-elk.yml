@@ -2,5 +2,5 @@ include:
   - path:
     - ../docker-compose-elk.yml
     - ../docker-compose-monitoring.yml
-    - ../docker-kafka-ui.yml
+    - ../docker-compose-kafka-ui.yml
     - ../docker-compose-node_exporter.yml
