@@ -37,7 +37,7 @@ services:
       KAFKA_OFFSETS_RETENTION_MINUTES: 1
       KAFKA_ELECTION_TIMEOUT_MS: 5000
 
-    command: ["sh", "-c", "sleep 15 && /etc/confluent/docker/run"]
+    # command: ["sh", "-c", "sleep 15 && /etc/confluent/docker/run"]
     volumes:
       - kafka_log:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/

@@ -40,7 +40,7 @@ services:
       # See https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-storage-sh
       # KAFKA_LOG_RETENTION_MS: 10
     
-    command: ["sh", "-c", "sleep 15 && /etc/confluent/docker/run"]
+    # command: ["sh", "-c", "sleep 15 && /etc/confluent/docker/run"]
     volumes:
       - kafka_log:/var/lib/kafka/data
       - ../jmx-exporter:/usr/share/jmx_exporter/
