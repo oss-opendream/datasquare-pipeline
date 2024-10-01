@@ -1,0 +1,4 @@
+include:
+  - path:
+    - ../docker-compose-minio.yml
+    - ../docker-compose-node_exporter.yml

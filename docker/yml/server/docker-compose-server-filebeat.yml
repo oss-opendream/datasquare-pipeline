@@ -1,0 +1,4 @@
+include:
+  - path:
+    - ../docker-compose-filebeat.yml
+    - ../docker-compose-node_exporter.yml
