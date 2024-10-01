@@ -4,7 +4,7 @@ import time
 from confluent_kafka.admin import AdminClient, NewTopic
 
 if __name__ == '__main__':
-    conf = {'bootstrap.servers': 'kafka1:9092, kafka2:9092, kafka39092'}
+    conf = {'bootstrap.servers': 'kafka1:9092, kafka2:9092, kafka3:9092'}
     kadmin = AdminClient(conf)
     topic_dict = kadmin.list_topics().topics
 
