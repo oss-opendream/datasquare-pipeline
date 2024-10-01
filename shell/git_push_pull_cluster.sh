@@ -7,6 +7,7 @@ servers=( \
   "kafka3" \
   "kafka4" \
   "ds-server" \
+  "ds-db" \
   "elk" \
   "minio" \
   )
