@@ -24,13 +24,23 @@ done
 
 # -o 옵션을 넣으면 kafka4 
 while getopts "a" opt; do
-    case $opt in
-        a)
-            echo "Docker composing kafka4 up..."
-            DOCKER_CMD="docker compose -f ~/datasquare-pipeline/docker/yml/server/docker-compose-server-kafka4.yml up -d"
-            ssh kafka4 "$DOCKER_CMD"
-            ;;
-    esac
+  case $opt in
+    a)
+      echo "Docker composing kafka4 up..."
+      DOCKER_CMD="docker compose -f ~/datasquare-pipeline/docker/yml/server/docker-compose-server-kafka4.yml up -d"
+      ssh kafka4 "$DOCKER_CMD"
+      ;;
+    \?)
+      ./kafka_down_all.sh
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1  # 잘못된 옵션이 들어오면 스크립트 종료
+      ;;
+    :)
+      ./kafka_down_all.sh
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1  # 옵션에 인자가 없을 경우 스크립트 종료
+      ;;
+  esac
 done
 
 
