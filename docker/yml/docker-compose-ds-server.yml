@@ -1,0 +1,13 @@
+services:
+  ds-server:
+    image : ds-server:2.0
+    ports:
+      - 8000:8000
+    volumes:
+      - /data/fastapi_log:/data/fastapi_log
+    environment:
+      - TOKEN={insert your hugging face token}
+    command: >
+      /bin/bash -c "
+      expect token_input.exp
+      "
