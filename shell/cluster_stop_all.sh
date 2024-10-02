@@ -22,7 +22,7 @@ compose_files=( \
 
 # 반복문을 사용하여 서버별로 docker-compose 명령 실행
 for i in ${!servers[@]}; do
-  echo "Docker composing server[$((i+1))] down..."
+  echo "Docker composing ${servers[$i]} down..."
   DOCKER_CMD="docker compose -f ~/datasquare-pipeline/docker/yml/server/${compose_files[$i]} down"
   ssh ${servers[$i]} "$DOCKER_CMD"
 done
