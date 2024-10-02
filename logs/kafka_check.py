@@ -1,7 +1,4 @@
-import socket
-import time
-
-from confluent_kafka.admin import AdminClient, NewTopic, TopicMetadata
+from confluent_kafka.admin import AdminClient
 import configparser as parser
 
 
@@ -11,9 +8,9 @@ if __name__ == '__main__':
         properties.read('./kafka_config.ini')
     except FileNotFoundError as e:
         print(e)
-        TOPIC_NAME = "datasquare_web_log2"
+        TOPIC_NAME = "datasquare_web_log"
         BROKER_NUMBER = 3
-        BOOTSTRAP_SERVER = 'server1:9092, server2:9092, server3:9092'
+        BOOTSTRAP_SERVER = 'kafka1:9092, kafka2:9092, kafka3:9092'
         
 
 
@@ -26,32 +23,6 @@ if __name__ == '__main__':
     kadmin = AdminClient(conf)
     # topic_dict = kadmin.list_topics().topics
     metadata = kadmin.list_topics()
-    # for broker in metadata.brokers:
-    #     print(broker)
-    #     print(metadata.brokers)
-
-    # topic_name = 'datasquare_web_log'
-
-
-    # print(topic_name, broker_number)
-    # while len(topic_dict) <= 1:
-    #     print('Bootstrap servers are not ready yet. \nRetry after 5 seconds')
-    #     time.sleep(5)
-    #     kadmin = AdminClient(conf)
-    #     topic_dict = kadmin.list_topics().topics
-
-    # if topic_name in topic_dict:
-    #     print(f"'{topic_name}' topic found")
-
-    # else:
-    #     print(f"'{topic_name}' topic not found. \nNew topic '{topic_name}' will be created.")
-    #     new_topic = kadmin.create_topics([NewTopic(TOPIC_NAME, num_partitions=3, replication_factor= 3)])
-
-    # time.sleep(5)
-    # topic_dict = kadmin.list_topics().topics
-    # print(topic_dict.keys())
-    print(kadmin.list_consumer_groups())
-    # print(dir(kadmin.list_consumer_groups()))
     print(kadmin.describe_cluster())
     print("_______________________________________")
     

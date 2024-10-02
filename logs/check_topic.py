@@ -23,7 +23,7 @@ if __name__ == '__main__':
     metadata = kadmin.list_topics(timeout=10)
     
     print("_______________________________________")
-    while len(metadata.brokers) <= len(BOOTSTRAP_SERVER):
+    while len(metadata.brokers) < len(BOOTSTRAP_SERVER):
         print('Bootstrap servers are not ready yet. \nRetry after 5 seconds')
         time.sleep(5)
 
