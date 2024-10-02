@@ -28,7 +28,7 @@ while getopts "o" opt; do
         o)
             echo "Docker composing kafka4 up..."
             DOCKER_CMD="docker compose -f ~/datasquare-pipeline/docker/yml/server/docker-compose-server4.yml up -d"
-            ssh kafka "$DOCKER_CMD"
+            ssh kafka4 "$DOCKER_CMD"
             ;;
     esac
 done
