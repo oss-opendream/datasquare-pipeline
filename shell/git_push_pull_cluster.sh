@@ -2,14 +2,14 @@
 
 # 서버 배열
 servers=( \
+  "ds-db" \
+  "ds-server" \
   "kafka1" \
   "kafka2" \
   "kafka3" \
   "kafka4" \
-  "ds-server" \
-  "ds-db" \
-  "elk" \
   "minio" \
+  "elk" \
   )
 
 # 현재 서버에서 git push 및 git pull 실행
