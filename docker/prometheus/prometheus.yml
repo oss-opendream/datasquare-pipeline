@@ -29,18 +29,18 @@ scrape_configs:
       - targets: ['kafka1:8080','kafka2:8080', 'kafka3:8080','kafka4:8080']
 
   - job_name: 'minio-job'
-    bearer_token: 'none'
+    bearer_token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoiYWRtaW4iLCJleHAiOjQ4ODE2MjQwNDl9.nWs0Ilk2mLZxyfLVy-Q-sK964Ty9gncDV-u2Tq_oGhYTJACbAt69a_thc2Pmv40cMJf4PUKPNI0nAf_LOz9ioA'
     metrics_path: '/minio/v2/metrics/cluster'
     scheme: 'http'
     static_configs:
-    - targets: ['minio:9000']
+    - targets: ['minio1:9000']
 
   - job_name: 'minio-job-bucket'
-    bearer_token: 'none'
+    bearer_token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoiYWRtaW4iLCJleHAiOjQ4ODE2MjQwNDl9.nWs0Ilk2mLZxyfLVy-Q-sK964Ty9gncDV-u2Tq_oGhYTJACbAt69a_thc2Pmv40cMJf4PUKPNI0nAf_LOz9ioA'
     metrics_path: '/minio/v2/metrics/bucket'
     scheme: 'http'
     static_configs:
-    - targets: ['minio:9000']
+    - targets: ['minio1:9000']
 
   - job_name: 'node-exporter'
     static_configs:
