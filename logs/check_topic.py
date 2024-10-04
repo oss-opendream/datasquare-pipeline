@@ -29,8 +29,10 @@ if __name__ == '__main__':
     
     print("_______________________________________")
     while len(metadata.brokers) < BROKER_NUMBER:
+        print(f"Found bootstrap servers: {metadata.brokers}")
         print('Bootstrap servers are not ready yet. \nRetry after 5 seconds')
         time.sleep(5)
+        metadata = kadmin.list_topics()
 
     if TOPIC_NAME in metadata.topics:
         print(f"'{TOPIC_NAME}' topic found")
