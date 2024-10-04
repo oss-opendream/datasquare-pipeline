@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     # Set Kafka configuration
     kafka_config = {
-        'bootstrap.servers': 'server1:9092,server2:9092,server3:9092',
+        'bootstrap.servers': 'kafka1:9092,kafka2:9092,kafka3:9092',
         'client.id': socket.gethostname(),
         'group.id': 'datasquare_minio',  # 추가
         'auto.offset.reset': 'earliest'   # 추가
@@ -46,14 +46,14 @@ if __name__ == '__main__':
     bucket_name = parser.get("MINIO_CREDENTIALS", "BUCKET")
 
     # Create MinIO instance
-    minio_client = Minio('server3:9000',
+    minio_client = Minio('minio1:9000',
                          access_key=access_key,
                          secret_key=secret_key,
                          secure=False)
 
     # Create Consumer instance
     consumer = Consumer(kafka_config)
-    topics = ["datasquare_web_log2"]
+    topics = ["datasquare_web_log"]
     consumer.subscribe(topics)
 
     # File management setup
