@@ -1,9 +1,9 @@
 name: push&pull
 
-on:
-  push:
-    branches:
-      - '**'
+# on:
+#   push:
+#     branches:
+#       - '**'
 
 jobs:
   deploy:
