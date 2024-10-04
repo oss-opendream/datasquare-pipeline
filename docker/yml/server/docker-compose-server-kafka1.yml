@@ -2,6 +2,7 @@ include:
   - path:
     - ../docker-compose-kafka1.yml
     - ../docker-compose-node_exporter.yml
+    - ../docker-compose-kafka_exporter.yml
   - extra_hosts:
     - "kafka1:10.178.0.11"
     - "kafka2:10.178.0.12"
